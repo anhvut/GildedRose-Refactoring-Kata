@@ -21,24 +21,16 @@ public class Item {
 
     void updateItem() {
         if ("Aged Brie".equals(name)) {
-            if (quality < 50) {
-                quality = quality + 1;
-            }
+            increaseQualityIfBelow50();
         } else if ("Backstage passes to a TAFKAL80ETC concert".equals(name)) {
-            if (quality < 50) {
-                quality = quality + 1;
-            }
+            increaseQualityIfBelow50();
 
             if (sellIn < 11) {
-                if (quality < 50) {
-                    quality = quality + 1;
-                }
+                increaseQualityIfBelow50();
             }
 
             if (sellIn < 6) {
-                if (quality < 50) {
-                    quality = quality + 1;
-                }
+                increaseQualityIfBelow50();
             }
         } else {
             if (quality > 0) {
@@ -56,9 +48,7 @@ public class Item {
 
         if (sellIn < 0) {
             if ("Aged Brie".equals(name)) {
-                if (quality < 50) {
-                    quality = quality + 1;
-                }
+                increaseQualityIfBelow50();
             } else {
                 if ("Backstage passes to a TAFKAL80ETC concert".equals(name)) {
                     quality = quality - quality;
@@ -71,6 +61,12 @@ public class Item {
                     }
                 }
             }
+        }
+    }
+
+    private void increaseQualityIfBelow50() {
+        if (quality < 50) {
+            quality = quality + 1;
         }
     }
 }
