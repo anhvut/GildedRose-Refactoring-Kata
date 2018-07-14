@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public class Item {
+public abstract class Item {
 
     public String name;
 
@@ -8,7 +8,7 @@ public class Item {
 
     public int quality;
 
-    public Item(String name, int sellIn, int quality) {
+    protected Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
@@ -25,48 +25,11 @@ public class Item {
         updateQualityAfterSellIn();
     }
 
-    protected void updateQualityBeforeSellIn() {
-        if ("Aged Brie".equals(name)) {
-            increaseQualityIfBelow50();
-        } else if ("Backstage passes to a TAFKAL80ETC concert".equals(name)) {
-            increaseQualityIfBelow50();
+    abstract protected void updateQualityBeforeSellIn();
 
-            if (sellIn < 11) {
-                increaseQualityIfBelow50();
-            }
+    abstract protected void updateSellIn();
 
-            if (sellIn < 6) {
-                increaseQualityIfBelow50();
-            }
-        } else if ("Sulfuras, Hand of Ragnaros".equals(name)) {
-        } else {
-            decreaseQualityIfAbove0();
-        }
-    }
-
-    protected void updateSellIn() {
-        if ("Sulfuras, Hand of Ragnaros".equals(name)) {
-        } else {
-            decreaseSellIn();
-        }
-    }
-
-    protected void updateQualityAfterSellIn() {
-        if ("Aged Brie".equals(name)) {
-            if (sellIn < 0) {
-                increaseQualityIfBelow50();
-            }
-        } else if ("Backstage passes to a TAFKAL80ETC concert".equals(name)) {
-            if (sellIn < 0) {
-                dropQuality();
-            }
-        } else if ("Sulfuras, Hand of Ragnaros".equals(name)) {
-        } else {
-            if (sellIn < 0) {
-                decreaseQualityIfAbove0();
-            }
-        }
-    }
+    abstract protected void updateQualityAfterSellIn();
 
     protected void dropQuality() {
         quality = 0;
