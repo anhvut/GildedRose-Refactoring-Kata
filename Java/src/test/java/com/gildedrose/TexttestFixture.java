@@ -1,5 +1,10 @@
 package com.gildedrose;
 
+import org.approvaltests.Approvals;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 public class TexttestFixture {
     public static void main(String[] args) {
         System.out.println("OMGHAI!");
@@ -34,4 +39,26 @@ public class TexttestFixture {
         }
     }
 
+    private java.io.PrintStream originalSysOut;
+    private java.io.ByteArrayOutputStream capturedStream;
+
+    @Before
+    public void setUp() throws Exception {
+
+        this.originalSysOut = System.out;
+        this.capturedStream = new java.io.ByteArrayOutputStream();
+        java.io.PrintStream printStream = new java.io.PrintStream(this.capturedStream);
+        System.setOut(printStream);
+    }
+
+    @Test
+    public void goldenMasterTest() {
+        TexttestFixture.main(new String[0]);
+        Approvals.verify(capturedStream);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        System.setOut(this.originalSysOut);
+    }
 }
