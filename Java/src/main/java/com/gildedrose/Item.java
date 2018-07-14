@@ -20,7 +20,25 @@ public class Item {
     }
 
     void updateItem() {
-        if ("Aged Brie".equals(name) || "Backstage passes to a TAFKAL80ETC concert".equals(name)) {
+        if ("Aged Brie".equals(name)) {
+            if (quality < 50) {
+                quality = quality + 1;
+
+                if ("Backstage passes to a TAFKAL80ETC concert".equals(name)) {
+                    if (sellIn < 11) {
+                        if (quality < 50) {
+                            quality = quality + 1;
+                        }
+                    }
+
+                    if (sellIn < 6) {
+                        if (quality < 50) {
+                            quality = quality + 1;
+                        }
+                    }
+                }
+            }
+        } else if ("Backstage passes to a TAFKAL80ETC concert".equals(name)) {
             if (quality < 50) {
                 quality = quality + 1;
 
