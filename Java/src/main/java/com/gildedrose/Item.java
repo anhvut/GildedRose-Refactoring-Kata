@@ -20,6 +20,12 @@ public class Item {
     }
 
     void updateItem() {
+        updateQualityBeforeSellIn();
+        updateSellIn();
+        updateQualityAfterSellIn();
+    }
+
+    protected void updateQualityBeforeSellIn() {
         if ("Aged Brie".equals(name)) {
             increaseQualityIfBelow50();
         } else if ("Backstage passes to a TAFKAL80ETC concert".equals(name)) {
@@ -36,12 +42,16 @@ public class Item {
         } else {
             decreaseQualityIfAbove0();
         }
+    }
 
+    protected void updateSellIn() {
         if ("Sulfuras, Hand of Ragnaros".equals(name)) {
         } else {
             decreaseSellIn();
         }
+    }
 
+    protected void updateQualityAfterSellIn() {
         if ("Aged Brie".equals(name)) {
             if (sellIn < 0) {
                 increaseQualityIfBelow50();
