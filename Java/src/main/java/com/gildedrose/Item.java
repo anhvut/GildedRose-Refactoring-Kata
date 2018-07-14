@@ -32,12 +32,10 @@ public class Item {
             if (sellIn < 6) {
                 increaseQualityIfBelow50();
             }
+        } else if ("Sulfuras, Hand of Ragnaros".equals(name)) {
         } else {
             if (quality > 0) {
-                if ("Sulfuras, Hand of Ragnaros".equals(name)) {
-                } else {
-                    quality = quality - 1;
-                }
+                quality = quality - 1;
             }
         }
 
@@ -46,19 +44,19 @@ public class Item {
             sellIn = sellIn - 1;
         }
 
-        if (sellIn < 0) {
-            if ("Aged Brie".equals(name)) {
+        if ("Aged Brie".equals(name)) {
+            if (sellIn < 0) {
                 increaseQualityIfBelow50();
-            } else {
-                if ("Backstage passes to a TAFKAL80ETC concert".equals(name)) {
-                    quality = quality - quality;
-                } else {
-                    if (quality > 0) {
-                        if ("Sulfuras, Hand of Ragnaros".equals(name)) {
-                            return;
-                        }
-                        quality = quality - 1;
-                    }
+            }
+        } else if ("Backstage passes to a TAFKAL80ETC concert".equals(name)) {
+            if (sellIn < 0) {
+                quality = quality - quality;
+            }
+        } else if ("Sulfuras, Hand of Ragnaros".equals(name)) {
+        } else {
+            if (sellIn < 0) {
+                if (quality > 0) {
+                    quality = quality - 1;
                 }
             }
         }
