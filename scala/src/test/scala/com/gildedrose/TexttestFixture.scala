@@ -1,5 +1,10 @@
 package com.gildedrose
 
+import java.io.{ByteArrayOutputStream, PrintStream}
+
+import org.approvaltests.Approvals
+import org.junit.Test
+
 object TexttestFixture {
   def main(args: Array[String]): Unit = {
     var items = Array[Item](
@@ -25,5 +30,20 @@ object TexttestFixture {
       System.out.println()
       app.updateQuality()
     }
+  }
+}
+
+class GoldenMasterTest {
+  @Test
+  def goldenMasterTest() {
+    val originalSysOut = System.out
+    val capturedStream = new ByteArrayOutputStream
+    val printStream: PrintStream = new PrintStream(capturedStream)
+    System.setOut(printStream)
+
+    TexttestFixture.main(Array[String]())
+    System.setOut(originalSysOut)
+
+    Approvals.verify(capturedStream.toString)
   }
 }
