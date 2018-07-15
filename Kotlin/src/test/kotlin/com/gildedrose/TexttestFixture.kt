@@ -1,19 +1,24 @@
 package com.gildedrose
 
+import org.approvaltests.Approvals
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
+
 fun main(args: Array<String>) {
 
     println("OMGHAI!")
 
-    val items = arrayOf(Item("+5 Dexterity Vest", 10, 20), //
-            Item("Aged Brie", 2, 0), //
-            Item("Elixir of the Mongoose", 5, 7), //
-            Item("Sulfuras, Hand of Ragnaros", 0, 80), //
-            Item("Sulfuras, Hand of Ragnaros", -1, 80),
-            Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-            Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-            Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+    val items = arrayOf(createItem("+5 Dexterity Vest", 10, 20), //
+            createItem("Aged Brie", 2, 0), //
+            createItem("Elixir of the Mongoose", 5, 7), //
+            createItem("Sulfuras, Hand of Ragnaros", 0, 80), //
+            createItem("Sulfuras, Hand of Ragnaros", -1, 80),
+            createItem("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+            createItem("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+            createItem("Backstage passes to a TAFKAL80ETC concert", 5, 49),
             // this conjured item does not work properly yet
-            Item("Conjured Mana Cake", 3, 6))
+            createItem("Conjured Mana Cake", 3, 6))
 
     val app = GildedRose(items)
 
@@ -31,6 +36,32 @@ fun main(args: Array<String>) {
         println()
         app.updateQuality()
     }
+}
 
 
+
+class TestGoldenMaster {
+
+    private val originalSysOut: java.io.PrintStream = System.out
+    private var capturedStream: java.io.ByteArrayOutputStream = java.io.ByteArrayOutputStream()
+
+    @Before
+    @Throws(Exception::class)
+    fun setUp() {
+        this.capturedStream = java.io.ByteArrayOutputStream()
+        val printStream = java.io.PrintStream(this.capturedStream)
+        System.setOut(printStream)
+    }
+
+    @Test
+    fun itShouldGoldenMaster() {
+        main(emptyArray())
+        Approvals.verify(capturedStream);
+    }
+
+    @After
+    @Throws(Exception::class)
+    fun tearDown() {
+        System.setOut(this.originalSysOut)
+    }
 }
