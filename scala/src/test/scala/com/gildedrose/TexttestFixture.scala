@@ -8,16 +8,16 @@ import org.junit.Test
 object TexttestFixture {
   def main(args: Array[String]): Unit = {
     var items = Array[Item](
-      new Item("+5 Dexterity Vest", 10, 20),
-      new Item("Aged Brie", 2, 0),
-      new Item("Elixir of the Mongoose", 5, 7),
-      new Item("Sulfuras, Hand of Ragnaros", 0, 80),
-      new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+      Factory.createItem("+5 Dexterity Vest", 10, 20),
+      Factory.createItem("Aged Brie", 2, 0),
+      Factory.createItem("Elixir of the Mongoose", 5, 7),
+      Factory.createItem("Sulfuras, Hand of Ragnaros", 0, 80),
+      Factory.createItem("Sulfuras, Hand of Ragnaros", -1, 80),
+      Factory.createItem("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+      Factory.createItem("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+      Factory.createItem("Backstage passes to a TAFKAL80ETC concert", 5, 49),
       // this conjured item does not work properly yet
-      new Item("Conjured Mana Cake", 3, 6)
+      Factory.createItem("Conjured Mana Cake", 3, 6)
     )
     val app = new GildedRose(items)
     val days = if (args.length > 0) args(0).toInt + 1 else 2
